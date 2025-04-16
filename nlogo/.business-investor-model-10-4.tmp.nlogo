@@ -2,7 +2,7 @@
 ;
 ; Version: 0.0.1 2025-04-16
 ; Author: Daniel Vartanian
-; License : CC0 - “No Rights Reserved”
+; License : CC0
 ;
 ; Based on Railsback & Grimm (2019), Topic 10.4.
 

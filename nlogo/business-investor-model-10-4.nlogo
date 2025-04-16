@@ -1,8 +1,8 @@
-; Business Investor Model
+; Business Investor Model T10.4
 ;
-; Version: 0.0.1 2025-04-16
+; Version: 0.1.0 2025-04-16
 ; Author: Daniel Vartanian
-; License : CC0
+; License : CC0 1.0 Universal
 ;
 ; Based on Railsback & Grimm (2019), Topic 10.4.
 
@@ -106,33 +106,6 @@ end
 
 to-report utility [#wealth #profit #risk #time]
   report (#wealth + (#time * #profit)) * ((1 - #risk) ^ #time)
-end
-
-to-report random-beta [#alpha #beta]
-  let XX random-gamma #alpha 1
-  let YY random-gamma #beta 1
-  report XX / (XX + YY)
-end
-
-to-report scale-par [#x #min #max]
-  let y 0
-  ifelse (#x > 0.5) [set y (abs ((#x - 0.5) - 0.5))] [set y #x]
-
-  report (#min + (#max - #min) * (y - 0) / (0.5 - 0)) ; range 1-4
-end
-
-to-report custom-random-beta [#x]
-  if not is-number? #x [
-    user-message (
-      word "Error with `custom-random-beta`. The input is not a number."
-   )
-  ]
-
-  ifelse #x <= 0.5 [
-      report random-beta (scale-par #x 1.1 4) 4
-    ] [
-      report random-beta 4 (scale-par #x 1.1 4)
-    ]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
