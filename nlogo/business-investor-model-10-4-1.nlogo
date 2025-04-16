@@ -1,7 +1,7 @@
 ; Business Investor Model T10.4.1
 ;
-; Version: 0.1.0 2025-04-16
 ; Author: Daniel Vartanian
+; Version: 0.1.0 2025-04-16
 ; License : CC0 1.0 Universal
 
 globals [
@@ -574,7 +574,7 @@ NIL
 HORIZONTAL
 
 @#$#@#$#@
-# THE BUSINESS INVESTOR MODEL (10.4.1)
+# THE BUSINESS INVESTOR MODEL (T10.4.1)
 
 See Topic 10.4.1 from Railsback & Grimm (2019) to learn about this model.
 

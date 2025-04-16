@@ -1,11 +1,16 @@
-; Business Investor Model T10.4.2
+; Business Investor Model T11.5
 ;
 ; Author: Daniel Vartanian
 ; Version: 0.1.0 2025-04-16
 ; License : CC0 1.0 Universal
 
+extensions [
+  palette
+]
+
 globals [
   failed-investors
+  total-business-failures
 ]
 
 breed [investors investor]
@@ -23,7 +28,7 @@ patches-own [
 to setup
   clear-all
 
-  set failed-investors 0
+  set total-business-failures 0
 
   create-investors n-investors [
     setxy random-pxcor random-pycor
@@ -40,12 +45,21 @@ to setup
 
   ask patches [
     set profit random-exponential profit-mean
-    if profit < 0.01 [set profit 0.01]
+    set profit profit - 2000
 
     set risk-of-failing random-float risk-of-failing-max
     if risk-of-failing < 0.01 [set risk-of-failing 0.01]
 
-    set pcolor scale-color businesses-color profit (profit-mean * 2.5) 0
+    (
+      ifelse
+      (profit < 0) [
+        set pcolor scale-color businesses-color-negative profit (- (profit-mean * 2.5)) 0
+      ] (profit = 0) [
+        set pcolor white
+      ] (profit > 0) [
+        set pcolor scale-color businesses-color-positive profit (profit-mean * 2.5) 0
+      ]
+    )
   ]
 
   reset-ticks
@@ -63,7 +77,7 @@ end
 
 to perform-repositioning
   ask investors [
-    let potential-destinations patches in-radius sensing-radius with [not any? turtles-here]
+    let potential-destinations neighbors with [(not any? turtles-here)]
     set potential-destinations (patch-set potential-destinations patch-here)
     set potential-destinations potential-destinations with [is-number? profit]
 
@@ -90,8 +104,21 @@ to update-wealth
     ifelse ([risk-of-failing] of patch-here = "NA") [
       set wealth 0
       set suffered-a-failure? true
+      set total-business-failures total-business-failures + 1
     ] [
       set wealth wealth + [profit] of patch-here
+
+      if (wealth < 0) [
+        ask patch-here [
+          set profit "NA"
+          set risk-of-failing "NA"
+          set pcolor failed-businesses-color
+        ]
+
+        set wealth 0
+        set suffered-a-failure? true
+        set total-business-failures total-business-failures + 1
+      ]
     ]
   ]
 end
@@ -103,7 +130,13 @@ to-report utility-for [#investor]
 end
 
 to-report utility [#wealth #profit #risk #time]
-  report (#wealth + (#time * #profit)) * ((1 - #risk) ^ #time)
+  let out (#wealth + (#time * #profit)) * ((1 - #risk) ^ #time)
+
+  ifelse (out < 0) [
+    report 0
+  ] [
+    report out
+  ]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -229,7 +262,7 @@ Frequency
 0.0
 true
 false
-"let max-plot-x ceiling (max [profit] of patches with [is-number? profit])\nset-plot-x-range 0 (max-plot-x + 10)\nset-histogram-num-bars 30" ""
+"let min-plot-x ceiling (min [profit] of patches with [is-number? profit])\nlet max-plot-x ceiling (max [profit] of patches with [is-number? profit])\nset min-plot-x (ifelse-value (min-plot-x < 0) [min-plot-x] [0])\nset-plot-x-range min-plot-x (max-plot-x + 10)\nset-histogram-num-bars 30" ""
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [profit] of patches with [is-number? profit]"
 
@@ -297,10 +330,10 @@ standard-deviation [risk-of-failing] of patches with [is-number? risk-of-failing
 
 INPUTBOX
 10
-355
+315
 230
-415
-businesses-color
+375
+businesses-color-positive
 105.0
 1
 0
@@ -308,11 +341,11 @@ Color
 
 INPUTBOX
 10
-290
+250
 230
-350
+310
 investors-color
-15.0
+25.0
 1
 0
 Color
@@ -495,7 +528,7 @@ PENS
 MONITOR
 1465
 270
-1685
+1570
 315
 Failed Investors
 count investors with [suffered-a-failure? = true]
@@ -505,9 +538,9 @@ count investors with [suffered-a-failure? = true]
 
 INPUTBOX
 10
-420
+450
 230
-480
+510
 failed-businesses-color
 9.0
 1
@@ -573,25 +606,32 @@ wealth-start
 NIL
 HORIZONTAL
 
-SLIDER
+INPUTBOX
 10
-250
+380
 230
-283
-sensing-radius
-sensing-radius
+440
+businesses-color-negative
+15.0
+1
 0
+Color
+
+MONITOR
+1575
+270
+1685
+315
+Businesses failures
+total-business-failures
 10
-5.0
 1
-1
-NIL
-HORIZONTAL
+11
 
 @#$#@#$#@
-# THE BUSINESS INVESTOR MODEL (T10.4.2)
+# THE BUSINESS INVESTOR MODEL (T11.5)
 
-See Topic 10.4.2 from Railsback & Grimm (2019) to learn about this model.
+See Topic 11.5 from Railsback & Grimm (2019) to learn about this model.
 
 ## REFERENCES
 
@@ -906,75 +946,6 @@ NetLogo 6.4.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
-<experiments>
-  <experiment name="Figure 10.1.1" repetitions="10" runMetricsEveryStep="false">
-    <setup>setup</setup>
-    <go>go</go>
-    <metric>mean [wealth] of investors</metric>
-    <metric>standard-deviation [wealth] of investors</metric>
-    <enumeratedValueSet variable="n-investors">
-      <value value="25"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="risk-of-failing-max">
-      <value value="0.1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="failed-businesses-color">
-      <value value="9"/>
-    </enumeratedValueSet>
-    <steppedValueSet variable="sensing-radius" first="0" step="1" last="10"/>
-    <enumeratedValueSet variable="decision-time-horizon">
-      <value value="5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="wealth-start">
-      <value value="0"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="profit-mean">
-      <value value="5000"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="businesses-color">
-      <value value="105"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="investors-color">
-      <value value="15"/>
-    </enumeratedValueSet>
-  </experiment>
-  <experiment name="Figure 10.1.2" repetitions="10" runMetricsEveryStep="true">
-    <setup>setup</setup>
-    <go>go</go>
-    <metric>mean [wealth] of investors</metric>
-    <enumeratedValueSet variable="n-investors">
-      <value value="25"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="risk-of-failing-max">
-      <value value="0.1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="failed-businesses-color">
-      <value value="9"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="sensing-radius">
-      <value value="0"/>
-      <value value="1"/>
-      <value value="2"/>
-      <value value="5"/>
-      <value value="10"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="decision-time-horizon">
-      <value value="5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="wealth-start">
-      <value value="0"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="profit-mean">
-      <value value="5000"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="businesses-color">
-      <value value="105"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="investors-color">
-      <value value="15"/>
-    </enumeratedValueSet>
-  </experiment>
-</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default
