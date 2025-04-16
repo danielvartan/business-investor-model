@@ -1,0 +1,31 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#ffffff",
+    "activityBar.background": "#ffffff",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#df9f9f",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#ffffff",
+    "statusBar.background": "#ebeff8",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#c5d1eb",
+    "statusBarItem.remoteBackground": "#ebeff8",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#ebeff8",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#ebeff899",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "peacock.color": "#EBEFF8",
+  "cSpell.words": [
+    "INPUTBOX",
+    "pcolor",
+    "pxcor",
+    "pycor",
+    "Railsback",
+    "setxy",
+    "Vartanian"
+  ]
+}
