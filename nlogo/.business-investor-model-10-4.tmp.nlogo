@@ -4,16 +4,17 @@
 ; Author: Daniel Vartanian
 ; License : CC0 - “No Rights Reserved”
 ;
-; Based on Railsback & Grimm (2019), Topic 10.4
+; Based on Railsback & Grimm (2019), Topic 10.4.
 
 globals [
-  temp
+  failed-investors
 ]
 
 breed [investors investor]
 
 investors-own [
   wealth ; W
+  suffered-a-failure?
 ]
 
 patches-own [
@@ -24,24 +25,29 @@ patches-own [
 to setup
   clear-all
 
+  set failed-investors 0
+
   create-investors n-investors [
     setxy random-pxcor random-pycor
     set shape "person"
     set color investors-color
     set size 1.25
+    set pen-mode "down"
+    set wealth wealth-start
 
-    set wealth (custom-random-beta wealth-bias) * start-wealth-max-amount
-
-    if wealth < start-wealth-min-amount [set wealth start-wealth-min-amount]
+    while [any? other turtles-here] [
+      setxy random-pxcor random-pycor
+    ]
   ]
 
   ask patches [
-    set profit (custom-random-beta profit-bias) * profit-max-amount
-    set risk-of-failing custom-random-beta risk-of-faiing-bias
+    set profit random-exponential profit-mean
+    if profit < 0.01 [set profit 0.01]
 
-    if profit < min-profit [set profit min-profit]
+    set risk-of-failing random-float risk-of-failing-max
+    if risk-of-failing < 0.01 [set risk-of-failing 0.01]
 
-    set pcolor scale-color businesses-color profit (profit-max-amount * 2.5) 0
+    set pcolor scale-color businesses-color profit (profit-mean * 2.5) 0
   ]
 
   reset-ticks
@@ -85,6 +91,7 @@ to update-wealth
   ask investors [
     ifelse ([risk-of-failing] of patch-here = "NA") [
       set wealth 0
+      set suffered-a-failure? true
     ] [
       set wealth wealth + [profit] of patch-here
     ]
@@ -193,7 +200,7 @@ PLOT
 775
 10
 995
-220
+215
 Wealth (W)
 NIL
 Frequency
@@ -203,7 +210,7 @@ Frequency
 0.0
 true
 false
-"let min-plot-x floor (min [wealth] of investors)\nlet max-plot-x ceiling (max [wealth] of investors)\nset max-plot-x (ifelse-value (max-plot-x < start-wealth-max-amount) [start-wealth-max-amount] [max-plot-x])\nset-plot-x-range 0 (max-plot-x + 10)\nset-histogram-num-bars 30" "let max-plot-x ceiling (max [wealth] of investors)\nset max-plot-x (ifelse-value (max-plot-x < start-wealth-max-amount) [start-wealth-max-amount] [max-plot-x])\nset-plot-x-range 0 (max-plot-x + 10)\nset-histogram-num-bars 30"
+"let max-plot-x ceiling (max [wealth] of investors)\nset-plot-x-range 0 (max-plot-x + 10)\nset-histogram-num-bars 30" "let max-plot-x ceiling (max [wealth] of investors)\nset-plot-x-range 0 (max-plot-x + 10)\nset-histogram-num-bars 30"
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [wealth] of investors"
 
@@ -216,38 +223,8 @@ n-investors
 n-investors
 0
 100
-100.0
+25.0
 1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-10
-170
-230
-203
-start-wealth-min-amount
-start-wealth-min-amount
-1
-1000
-10.0
-10
-1
-NIL
-HORIZONTAL
-
-SLIDER
-10
-90
-230
-123
-wealth-bias
-wealth-bias
-0
-1
-0.25
-0.01
 1
 NIL
 HORIZONTAL
@@ -255,74 +232,14 @@ HORIZONTAL
 SLIDER
 10
 130
-232
+230
 163
-start-wealth-max-amount
-start-wealth-max-amount
+profit-mean
+profit-mean
 0
-1000
-1000.0
+10000
+5000.0
 10
-1
-NIL
-HORIZONTAL
-
-SLIDER
-10
-210
-230
-243
-profit-bias
-profit-bias
-0
-1
-0.33
-0.01
-1
-NIL
-HORIZONTAL
-
-SLIDER
-10
-250
-230
-283
-profit-max-amount
-profit-max-amount
-0
-1000
-300.0
-10
-1
-NIL
-HORIZONTAL
-
-SLIDER
-10
-290
-230
-323
-min-profit
-min-profit
-1
-1000
-10.0
-10
-1
-NIL
-HORIZONTAL
-
-SLIDER
-10
-330
-230
-363
-risk-of-failing-bias
-risk-of-failing-bias
-0
-1
-0.05
-0.01
 1
 NIL
 HORIZONTAL
@@ -331,7 +248,7 @@ PLOT
 1005
 10
 1225
-220
+215
 Profit (P)
 NIL
 Frequency
@@ -341,7 +258,7 @@ Frequency
 0.0
 true
 false
-"set-plot-x-range 0 (profit-max-amount) + 10\nset-histogram-num-bars 30" ""
+"let max-plot-x ceiling (max [profit] of patches with [is-number? profit])\nset-plot-x-range 0 (max-plot-x + 10)\nset-histogram-num-bars 30" ""
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [profit] of patches with [is-number? profit]"
 
@@ -349,7 +266,7 @@ PLOT
 1235
 10
 1455
-220
+215
 Risk of Failing (F)
 NIL
 Frequency
@@ -365,53 +282,53 @@ PENS
 
 MONITOR
 1005
-225
+220
 1110
-270
+265
 Mean (P)
 mean [profit] of patches with [is-number? profit]
-10
+5
 1
 11
 
 MONITOR
 1120
-225
+220
 1225
-270
+265
 SD (P)
 standard-deviation [profit] of patches with [is-number? profit]
-10
+5
 1
 11
 
 MONITOR
 1235
-225
+220
 1340
-270
+265
 Mean (F)
 mean [risk-of-failing] of patches with [is-number? risk-of-failing]
-10
+5
 1
 11
 
 MONITOR
 1350
-225
+220
 1455
-270
+265
 SD (F)
 standard-deviation [risk-of-failing] of patches with [is-number? risk-of-failing]
-10
+5
 1
 11
 
 INPUTBOX
 10
-475
+315
 230
-535
+375
 businesses-color
 105.0
 1
@@ -420,9 +337,9 @@ Color
 
 INPUTBOX
 10
-410
+250
 230
-470
+310
 investors-color
 15.0
 1
@@ -431,9 +348,9 @@ Color
 
 SLIDER
 10
-370
+210
 230
-403
+243
 decision-time-horizon
 decision-time-horizon
 0
@@ -446,9 +363,9 @@ HORIZONTAL
 
 PLOT
 775
-325
+320
 995
-535
+525
 Mean Wealth (W)
 Years
 Wealth
@@ -464,31 +381,31 @@ PENS
 
 MONITOR
 775
-225
+220
 875
-270
+265
 Mean (W)
 mean [wealth] of investors
-10
+5
 1
 11
 
 MONITOR
 885
-225
+220
 995
-270
+265
 SD (W)
 standard-deviation [wealth] of investors
-10
+5
 1
 11
 
 PLOT
 1005
-325
+320
 1225
-535
+525
 Mean Profit (P)
 Years
 Profit
@@ -504,9 +421,9 @@ PENS
 
 PLOT
 1235
-325
+320
 1455
-535
+525
 Mean Risk of Failing
 Years
 Risk of Failing
@@ -522,75 +439,75 @@ PENS
 
 MONITOR
 775
-275
+270
 875
-320
+315
 Min (W)
 min [wealth] of investors
-10
+5
 1
 11
 
 MONITOR
 885
-275
+270
 995
-320
+315
 Max (W)
 max [wealth] of investors
-10
+5
 1
 11
 
 MONITOR
 1005
-275
+270
 1110
-320
+315
 Min (P)
 min [profit] of patches with [is-number? profit]
-10
+5
 1
 11
 
 MONITOR
 1120
-275
+270
 1225
-320
+315
 Max (P)
 max [profit] of patches with [is-number? profit]
-10
+5
 1
 11
 
 MONITOR
 1235
-275
+270
 1340
-320
+315
 Min (F)
 min [risk-of-failing] of patches with [is-number? risk-of-failing]
-10
+5
 1
 11
 
 MONITOR
 1350
-275
+270
 1455
-320
+315
 Max (F)
 max [risk-of-failing] of patches with [is-number? risk-of-failing]
-10
+5
 1
 11
 
 PLOT
 1465
-325
+320
 1685
-535
+525
 Failed Investors
 Years
 Investors
@@ -602,40 +519,88 @@ true
 false
 "" "set-plot-x-range 0 (ticks + 0.5)"
 PENS
-"default" 1.0 0 -16777216 true "" "plot count investors with [wealth = 0]"
+"default" 1.0 0 -16777216 true "" "plot count investors with [suffered-a-failure? = true]"
 
 MONITOR
 1465
-275
-1570
-320
-Failed Investors
-count investors with [wealth = 0]
-10
-1
-11
-
-MONITOR
-1580
-275
+270
 1685
-320
-Successful Investors
-count investors with [wealth > 0]
+315
+Failed Investors
+count investors with [suffered-a-failure? = true]
 10
 1
 11
 
 INPUTBOX
-1465
-210
-1685
-270
+10
+380
+230
+440
 failed-businesses-color
 9.0
 1
 0
 Color
+
+PLOT
+1465
+10
+1685
+215
+SD Wealth (W)
+Years
+Wealth
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" "set-plot-x-range 0 (ticks + 0.5)"
+PENS
+"default" 1.0 0 -16777216 true "" "plot standard-deviation [wealth] of investors"
+
+MONITOR
+1465
+220
+1685
+265
+SD (W)
+standard-deviation [wealth] of investors
+10
+1
+11
+
+SLIDER
+10
+170
+230
+203
+risk-of-failing-max
+risk-of-failing-max
+0
+1
+0.1
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+10
+90
+232
+123
+wealth-start
+wealth-start
+0
+100000
+0.0
+10
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 # THE BUSINESS INVESTOR MODEL (10.4)
