@@ -30,7 +30,7 @@ to setup
 
   set total-business-failures 0
 
-  create-investors n-investors [
+  create-investors investors-n [
     setxy random-pxcor random-pycor
     set shape "person"
     set color investors-color
@@ -223,8 +223,8 @@ SLIDER
 50
 230
 83
-n-investors
-n-investors
+investors-n
+investors-n
 0
 100
 25.0
@@ -280,7 +280,7 @@ Frequency
 0.0
 true
 false
-"set-plot-x-range 0 (1 + 0.05)\nset-histogram-num-bars 30" ""
+"set-plot-x-range 0 (precision (risk-of-failing-max + 0.05) 2)\nset-histogram-num-bars 30" ""
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [risk-of-failing] of patches with [is-number? risk-of-failing]"
 
