@@ -1,0 +1,101 @@
+```{r}
+#| label: setup
+#| include: false
+
+source(here::here("R", "_setup.R"))
+```
+
+<!-- badges: start -->
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+<!-- badges: end -->
+
+## Overview
+
+This report presents the implementation of the *Business Investor Model* described in Railsback & Grimm ([2019](https://www.railsback-grimm-abm-book.com/)), *Agent-Based and Individual-Based Modeling: A Practical Introduction*. The model simulates interactions between businesses and investors to demonstrate fundamental concepts in agent-based modeling.
+
+## Model 10.4.2
+
+## Setting the Environment
+
+```{r}
+#| output: false
+
+library(brandr)
+library(dplyr)
+library(ggplot2)
+library(here)
+library(janitor)
+library(readr)
+library(stats)
+```
+
+### Figure 10.1.1
+
+```{r}
+data <-
+  here::here("data", "business-investor-model-10-4-2-figure-10-1-1-table.csv") |>
+  readr::read_csv(
+    skip = 6,
+    col_types = readr::cols(.default = "c")
+  ) |>
+  janitor::clean_names() |>
+  dplyr::select(
+    run_number,
+    sensing_radius,
+    mean_wealth_of_investors,
+    standard_deviation_wealth_of_investors
+  ) |>
+  dplyr::mutate(
+    dplyr::across(
+      .cols = dplyr::everything(),
+      .fns = as.numeric
+    )
+  ) |>
+  dplyr::summarize(
+    mean = mean(mean_wealth_of_investors, na.rm = TRUE),
+    sd = mean(standard_deviation_wealth_of_investors, na.rm = TRUE),
+    .by = sensing_radius
+  )
+```
+
+```{r}
+data
+```
+
+```{r}
+data |> dplyr::glimpse()
+```
+
+```{r}
+data |>
+  ggplot2::ggplot() +
+  ggplot2::geom_point(
+    mapping = ggplot2::aes(x = sensing_radius, y = mean),
+    shape = 19,
+  ) +
+  ggplot2::geom_point(
+    mapping = ggplot2::aes(x = sensing_radius, y = sd),
+    shape = 8,
+  ) +
+  ggplot2::scale_x_continuous(breaks = seq(0, 10, 2)) +
+  ggplot2::scale_y_continuous(
+    breaks = seq(0, 600000, 100000),
+    labels = ~ prettyNum(.x, big.mark = ",")
+  ) +
+  ggplot2::labs(
+    x = "Sensing radius",
+    y = "Mean final investor wealth"
+  )
+```
+
+## License
+
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
+
+All materials in this repository are licensed under the [CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/). This means that you can copy, modify, distribute and perform the work, even for commercial purposes, all without asking permission or attributing the original creation.
+
+## References {.unnumbered}
+
+::: {#refs}
+:::

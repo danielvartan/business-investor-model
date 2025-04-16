@@ -1,10 +1,8 @@
-; Business Investor Model T10.4
+; Business Investor Model T10.4.2
 ;
 ; Version: 0.1.0 2025-04-16
 ; Author: Daniel Vartanian
 ; License : CC0 1.0 Universal
-;
-; Based on Railsback & Grimm (2019), Topic 10.4.
 
 globals [
   failed-investors
@@ -65,7 +63,7 @@ end
 
 to perform-repositioning
   ask investors [
-    let potential-destinations neighbors with [(not any? turtles-here)]
+    let potential-destinations patches in-radius sensing-radius with [not any? turtles-here]
     set potential-destinations (patch-set potential-destinations patch-here)
     set potential-destinations potential-destinations with [is-number? profit]
 
@@ -299,9 +297,9 @@ standard-deviation [risk-of-failing] of patches with [is-number? risk-of-failing
 
 INPUTBOX
 10
-315
+355
 230
-375
+415
 businesses-color
 105.0
 1
@@ -310,9 +308,9 @@ Color
 
 INPUTBOX
 10
-250
+290
 230
-310
+350
 investors-color
 15.0
 1
@@ -507,9 +505,9 @@ count investors with [suffered-a-failure? = true]
 
 INPUTBOX
 10
-380
+420
 230
-440
+480
 failed-businesses-color
 9.0
 1
@@ -575,14 +573,29 @@ wealth-start
 NIL
 HORIZONTAL
 
-@#$#@#$#@
-# THE BUSINESS INVESTOR MODEL (10.4)
+SLIDER
+10
+250
+230
+283
+sensing-radius
+sensing-radius
+0
+10
+5.0
+1
+1
+NIL
+HORIZONTAL
 
-See Topic 10.4 from Railsback & Grimm (2019) to learn about this model.
+@#$#@#$#@
+# THE BUSINESS INVESTOR MODEL (10.4.2)
+
+See Topic 10.4.2 from Railsback & Grimm (2019) to learn about this model.
 
 ## REFERENCES
 
-Railsback, S. F., & Grimm, V. (2019). Agent-based and individual-based modeling: A practical introduction (2nd ed.). Princeton University Press.
+Railsback, S. F., & Grimm, V. (2019). *Agent-based and individual-based modeling: A practical introduction* (2nd ed.). Princeton University Press.
 @#$#@#$#@
 default
 true
