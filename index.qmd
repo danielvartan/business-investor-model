@@ -27,8 +27,17 @@ library(dplyr)
 library(ggplot2)
 library(here)
 library(janitor)
+library(patchwork)
 library(readr)
 library(stats)
+```
+
+```{r}
+#| include: false
+
+library(dplyr)
+library(ggplot2)
+library(patchwork)
 ```
 
 ### Figure 10.1.1
@@ -155,6 +164,246 @@ data |>
     x = "Year",
     y = "Mean investor wealth",
     color = "Sensing radius"
+  ) +
+  brandr::scale_color_brand_d()
+```
+
+## Model 11.5
+
+### Figure 12.1
+
+```{r}
+data <-
+  here::here(
+    "data",
+    "business-investor-model-11-5-figure-12-1-table.csv"
+  ) |>
+  readr::read_csv(
+    skip = 6,
+    col_types = readr::cols(.default = "c")
+  ) |>
+  janitor::clean_names() |>
+  dplyr::select(
+    run_number,
+    decision_time_horizon,
+    mean_wealth_of_investors,
+    mean_profit_of_turtles_on_patches,
+    mean_risk_of_failing_of_turtles_on_patches,
+    total_business_failures
+  ) |>
+  dplyr::mutate(
+    dplyr::across(
+      .cols = dplyr::everything(),
+      .fns = as.numeric
+    )
+  ) |>
+  dplyr::mutate(
+    decision_time_horizon = factor(decision_time_horizon, ordered = TRUE)
+  )
+```
+
+```{r}
+data
+```
+
+```{r}
+#| eval: false
+#| include: false
+
+data |> dplyr::glimpse()
+```
+
+```{r}
+plot_1 <-
+  data |>
+  dplyr::summarize(
+    mean = mean(mean_wealth_of_investors, na.rm = TRUE),
+    sd = stats::sd(mean_wealth_of_investors, na.rm = TRUE),
+    .by = decision_time_horizon
+  ) |>
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = decision_time_horizon,
+      y = mean,
+      ymin = mean - sd,
+      ymax = mean + sd
+    )
+  ) +
+  ggplot2::geom_point(shape = 19) +
+  ggplot2::geom_errorbar(linewidth = 0.2) +
+  ggplot2::scale_x_discrete(breaks = seq(0, 25, 5)) +
+  ggplot2::scale_y_continuous(
+    breaks = seq(0, 400000, 100000),
+    labels = ~ prettyNum(.x, big.mark = ","),
+    limits = c(0, 400000)
+  ) +
+  ggplot2::labs(
+    x = ggplot2::element_blank(),
+    y = "Mean final investor wealth"
+  )
+```
+
+```{r}
+plot_2 <-
+  data |>
+  dplyr::summarize(
+    mean = mean(total_business_failures, na.rm = TRUE),
+    sd = stats::sd(total_business_failures, na.rm = TRUE),
+    .by = decision_time_horizon
+  ) |>
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = decision_time_horizon,
+      y = mean,
+      ymin = mean - sd,
+      ymax = mean + sd
+    )
+  ) +
+  ggplot2::geom_point(shape = 19) +
+  ggplot2::geom_errorbar(linewidth = 0.2) +
+  ggplot2::scale_x_discrete(breaks = seq(0, 25, 5)) +
+  ggplot2::scale_y_continuous(limits = c(0, 200)) +
+  ggplot2::labs(
+    x = ggplot2::element_blank(),
+    y = "Number of failures"
+  )
+```
+
+```{r}
+plot_3 <-
+  data |>
+  dplyr::summarize(
+    mean = mean(mean_profit_of_turtles_on_patches, na.rm = TRUE),
+    sd = stats::sd(mean_profit_of_turtles_on_patches, na.rm = TRUE),
+    .by = decision_time_horizon
+  ) |>
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = decision_time_horizon,
+      y = mean,
+      ymin = mean - sd,
+      ymax = mean + sd
+    )
+  ) +
+  ggplot2::geom_point(shape = 19) +
+  ggplot2::geom_errorbar(linewidth = 0.2) +
+  ggplot2::scale_x_discrete(breaks = seq(0, 25, 5)) +
+  ggplot2::scale_y_continuous(
+    breaks = seq(0, 12500, 2500),
+    labels = ~ prettyNum(.x, big.mark = ","),
+    limits = c(0, 12500)
+  ) +
+  ggplot2::labs(
+    x = "Time horizon (years)",
+    y = "Mean annual profit"
+  )
+```
+
+```{r}
+plot_4 <-
+  data |>
+  dplyr::summarize(
+    mean = mean(
+      mean_risk_of_failing_of_turtles_on_patches,
+      na.rm = TRUE
+    ),
+    sd = stats::sd(
+      mean_risk_of_failing_of_turtles_on_patches,
+      na.rm = TRUE
+    ),
+    .by = decision_time_horizon
+  ) |>
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = decision_time_horizon,
+      y = mean,
+      ymin = mean - sd,
+      ymax = mean + sd
+    )
+  ) +
+  ggplot2::geom_point(shape = 19) +
+  ggplot2::geom_errorbar(linewidth = 0.2) +
+  ggplot2::scale_x_discrete(breaks = seq(0, 25, 5)) +
+  ggplot2::scale_y_continuous(
+    breaks = seq(0, 0.03, 0.01),
+    labels = ~ prettyNum(.x, big.mark = ","),
+    limits = c(0, 0.03)
+  ) +
+  ggplot2::labs(
+    x = "Time horizon (years)",
+    y = "Mean annual risk"
+  )
+```
+
+```{r}
+#| fig-height: 7
+#| fig-width: 15
+
+patchwork::wrap_plots(
+  plot_1 + plot_2 + plot_3 + plot_4,
+  ncol = 2,
+  axes = "collect_x"
+)
+```
+
+### Figure 12.2
+
+```{r}
+data <-
+  here::here(
+    "data",
+    "business-investor-model-11-5-figure-12-2-table.csv"
+  ) |>
+  readr::read_csv(
+    skip = 6,
+    col_types = readr::cols(.default = "c")
+  ) |>
+  janitor::clean_names() |>
+  dplyr::select(
+    run_number,
+    step,
+    decision_time_horizon,
+    mean_risk_of_failing_of_turtles_on_patches
+  ) |>
+  dplyr::mutate(
+    dplyr::across(
+      .cols = dplyr::everything(),
+      .fns = as.numeric
+    )
+  ) |>
+  dplyr::mutate(
+    decision_time_horizon = factor(decision_time_horizon, ordered = TRUE)
+  ) |>
+
+  dplyr::summarize(
+    mean = mean(mean_risk_of_failing_of_turtles_on_patches, na.rm = TRUE),
+    .by = c("step", "decision_time_horizon")
+  )
+```
+
+```{r}
+data
+```
+
+```{r}
+#| eval: false
+#| include: false
+
+data |> dplyr::glimpse()
+```
+
+```{r}
+data |>
+  ggplot2::ggplot(
+    ggplot2::aes(x = step, y = mean, color = decision_time_horizon)
+  ) +
+  ggplot2::geom_line() +
+  ggplot2::scale_x_continuous(breaks = seq(0, 50, 10)) +
+  ggplot2::scale_y_continuous(limits = c(0, 0.06)) +
+  ggplot2::labs(
+    x = "Time step (years)",
+    y = "Mean annual risk",
+    color = "Time horizon (years)"
   ) +
   brandr::scale_color_brand_d()
 ```

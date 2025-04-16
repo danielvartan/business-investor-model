@@ -254,10 +254,10 @@ PENS
 MONITOR
 1005
 220
-1110
+1117
 265
-Mean (P)
-mean [profit] of patches with [is-number? profit]
+Mean (P Chosen)
+mean [profit] of turtles-on patches
 5
 1
 11
@@ -267,8 +267,8 @@ MONITOR
 220
 1225
 265
-SD (P)
-standard-deviation [profit] of patches with [is-number? profit]
+SD (P Chosen)
+standard-deviation [profit] of turtles-on patches
 5
 1
 11
@@ -276,10 +276,10 @@ standard-deviation [profit] of patches with [is-number? profit]
 MONITOR
 1235
 220
-1340
+1347
 265
-Mean (F)
-mean [risk-of-failing] of patches with [is-number? risk-of-failing]
+Mean (F Chosen)
+mean [risk-of-failing] of turtles-on patches
 5
 1
 11
@@ -289,8 +289,8 @@ MONITOR
 220
 1455
 265
-SD (F)
-standard-deviation [risk-of-failing] of patches with [is-number? risk-of-failing]
+SD (F Chosen)
+standard-deviation [risk-of-failing] of turtles-on patches
 5
 1
 11
@@ -377,7 +377,7 @@ PLOT
 320
 1225
 525
-Mean Profit (P)
+Mean Profit (P Chosen)
 Years
 Profit
 0.0
@@ -388,25 +388,25 @@ true
 false
 "" "set-plot-x-range 0 (ticks + 0.5)"
 PENS
-"default" 1.0 0 -16777216 true "" "plot mean [profit] of patches with [is-number? profit]"
+"default" 1.0 0 -16777216 true "" "plot mean [profit] of turtles-on patches"
 
 PLOT
 1235
 320
 1455
 525
-Mean Risk of Failing
+Mean Risk of Failing (F Chosen)
 Years
 Risk of Failing
 0.0
 0.0
 0.0
-1.0
+0.25
 true
 false
 "" "set-plot-x-range 0 (ticks + 0.5)"
 PENS
-"default" 1.0 0 -16777216 true "" "plot mean [risk-of-failing] of patches with [is-number? risk-of-failing]"
+"default" 1.0 0 -16777216 true "" "plot mean [risk-of-failing] of turtles-on patches"
 
 MONITOR
 775
@@ -435,8 +435,8 @@ MONITOR
 270
 1110
 315
-Min (P)
-min [profit] of patches with [is-number? profit]
+Min (P Chosen)
+min [profit] of turtles-on patches
 5
 1
 11
@@ -446,8 +446,8 @@ MONITOR
 270
 1225
 315
-Max (P)
-max [profit] of patches with [is-number? profit]
+Max (P Chosen)
+max [profit] of turtles-on patches
 5
 1
 11
@@ -457,8 +457,8 @@ MONITOR
 270
 1340
 315
-Min (F)
-min [risk-of-failing] of patches with [is-number? risk-of-failing]
+Min (F Chosen)
+min [risk-of-failing] of turtles-on patches
 5
 1
 11
@@ -468,8 +468,8 @@ MONITOR
 270
 1455
 315
-Max (F)
-max [risk-of-failing] of patches with [is-number? risk-of-failing]
+Max (F Chosen)
+max [risk-of-failing] of turtles-on patches
 5
 1
 11
