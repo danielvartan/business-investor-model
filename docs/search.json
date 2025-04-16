@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "index.html#overview",
+    "href": "index.html#overview",
+    "title": "Business Investor Model",
+    "section": "Overview",
+    "text": "Overview\nThis report presents the implementation of the Business Investor Model described in Railsback & Grimm (2019). The model simulates interactions between businesses and investors to demonstrate fundamental concepts in agent-based modeling."
+  },
+  {
+    "objectID": "index.html#model-10.4.2",
+    "href": "index.html#model-10.4.2",
+    "title": "Business Investor Model",
+    "section": "Model 10.4.2",
+    "text": "Model 10.4.2"
+  },
+  {
+    "objectID": "index.html#setting-the-environment",
+    "href": "index.html#setting-the-environment",
+    "title": "Business Investor Model",
+    "section": "Setting the Environment",
+    "text": "Setting the Environment\n\nCodelibrary(brandr)\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(here)\nlibrary(janitor)\nlibrary(readr)\nlibrary(stats)\n\n\nFigure 10.1.1\n\nCodedata &lt;-\n  here::here(\n    \"data\",\n    \"business-investor-model-10-4-2-figure-10-1-1-table.csv\"\n  ) |&gt;\n  readr::read_csv(\n    skip = 6,\n    col_types = readr::cols(.default = \"c\")\n  ) |&gt;\n  janitor::clean_names() |&gt;\n  dplyr::select(\n    run_number,\n    sensing_radius,\n    mean_wealth_of_investors,\n    standard_deviation_wealth_of_investors\n  ) |&gt;\n  dplyr::mutate(\n    dplyr::across(\n      .cols = dplyr::everything(),\n      .fns = as.numeric\n    )\n  ) |&gt;\n  dplyr::summarize(\n    mean = mean(mean_wealth_of_investors, na.rm = TRUE),\n    sd = mean(standard_deviation_wealth_of_investors, na.rm = TRUE),\n    .by = sensing_radius\n  )\n\n\n\nCodedata\n\n\n  \n\n\n\n\nCodedata |&gt;\n  ggplot2::ggplot() +\n  ggplot2::geom_point(\n    mapping = ggplot2::aes(x = sensing_radius, y = mean),\n    shape = 19,\n  ) +\n  ggplot2::geom_point(\n    mapping = ggplot2::aes(x = sensing_radius, y = sd),\n    shape = 8,\n  ) +\n  ggplot2::scale_x_continuous(breaks = seq(0, 10, 2)) +\n  ggplot2::scale_y_continuous(\n    breaks = seq(0, 600000, 100000),\n    labels = ~ prettyNum(.x, big.mark = \",\")\n  ) +\n  ggplot2::labs(\n    x = \"Sensing radius\",\n    y = \"Mean final investor wealth\"\n  )\n\n\n\n\n\n\n\nFigure 10.1.2\n\nCodedata &lt;-\n  here::here(\n    \"data\",\n    \"business-investor-model-10-4-2-figure-10-1-2-table.csv\"\n  ) |&gt;\n  readr::read_csv(\n    skip = 6,\n    col_types = readr::cols(.default = \"c\")\n  ) |&gt;\n  janitor::clean_names() |&gt;\n  dplyr::select(\n    run_number,\n    step,\n    sensing_radius,\n    mean_wealth_of_investors\n  ) |&gt;\n  dplyr::mutate(\n    dplyr::across(\n      .cols = dplyr::everything(),\n      .fns = as.numeric\n    )\n  ) |&gt;\n  dplyr::mutate(\n    sensing_radius = factor(sensing_radius, ordered = TRUE)\n  ) |&gt;\n\n  dplyr::summarize(\n    mean = mean(mean_wealth_of_investors, na.rm = TRUE),\n    .by = c(\"step\", \"sensing_radius\")\n  )\n\n\n\nCodedata\n\n\n  \n\n\n\n\nCodedata |&gt;\n  ggplot2::ggplot(ggplot2::aes(x = step, y = mean, color = sensing_radius)) +\n  ggplot2::geom_line() +\n  ggplot2::scale_x_continuous(breaks = seq(0, 50, 10)) +\n  ggplot2::scale_y_continuous(\n    breaks = seq(0, 700000, 100000),\n    labels = ~ prettyNum(.x, big.mark = \",\")\n  ) +\n  ggplot2::labs(\n    x = \"Year\",\n    y = \"Mean investor wealth\",\n    color = \"Sensing radius\"\n  ) +\n  brandr::scale_color_brand_d()"
+  },
+  {
+    "objectID": "index.html#license",
+    "href": "index.html#license",
+    "title": "Business Investor Model",
+    "section": "License",
+    "text": "License\n\n\n\nThis report is licensed under CC0 1.0 Universal, placing it in the public domain. You may freely copy, modify, distribute, and use this work, even for commercial purposes, without permission or attribution."
+  },
+  {
+    "objectID": "index.html#references",
+    "href": "index.html#references",
+    "title": "Business Investor Model",
+    "section": "References",
+    "text": "References\n\n\nRailsback, S. F., & Grimm, V. (2019). Agent-based and individual-based modeling: A practical introduction (2nd ed.). Princeton University Press."
+  }
+]

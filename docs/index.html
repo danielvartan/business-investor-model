@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<meta name="dcterms.date" content="2025-04-16">
+<title>Business Investor Model</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<link href="./images/sustentarea-icon.svg" rel="icon" type="image/svg+xml">
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2ade4c202a29add217eadf66f1be2696.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-16aebcbcd2d1562a7b9b0023879e2ecd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script><link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<meta property="og:title" content="Business Investor Model">
+<meta property="og:description" content="">
+<meta property="og:image" content="https://danielvartan.github.io/business-investor-model/images/og-image.png">
+<meta property="og:image:alt" content="Sustentarea Research and Extension Group">
+<meta property="og:image:height" content="1600">
+<meta property="og:image:width" content="2400">
+<meta name="citation_title" content="Business Investor Model">
+<meta name="citation_publication_date" content="2025-04-16">
+<meta name="citation_cover_date" content="2025-04-16">
+<meta name="citation_year" content="2025">
+<meta name="citation_online_date" content="2025-04-16">
+<meta name="citation_fulltext_html_url" content="https://danielvartan.github.io/business-investor-model/">
+<meta name="citation_language" content="en">
+<meta name="citation_reference" content="citation_title=Agent-based and individual-based modeling: A practical introduction;,citation_author=Steven F. Railsback;,citation_author=Volker Grimm;,citation_publication_date=2019;,citation_cover_date=2019;,citation_year=2019;,citation_isbn=978-0-691-19082-2;,citation_language=en-US;">
+</head>
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item compact">
+    <a class="nav-link" href="https://danielvartan.github.io/business-investor-model/"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+</div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">On this page</h2>
+   
+  <ul>
+<li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#model-10.4.2" id="toc-model-10.4.2" class="nav-link" data-scroll-target="#model-10.4.2">Model 10.4.2</a></li>
+  <li>
+<a href="#setting-the-environment" id="toc-setting-the-environment" class="nav-link" data-scroll-target="#setting-the-environment">Setting the Environment</a>
+  <ul>
+<li><a href="#figure-10.1.1" id="toc-figure-10.1.1" class="nav-link" data-scroll-target="#figure-10.1.1">Figure 10.1.1</a></li>
+  <li><a href="#figure-10.1.2" id="toc-figure-10.1.2" class="nav-link" data-scroll-target="#figure-10.1.2">Figure 10.1.2</a></li>
+  </ul>
+</li>
+  <li><a href="#license" id="toc-license" class="nav-link" data-scroll-target="#license">License</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/danielvartan/business-investor-model/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/danielvartan/business-investor-model/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/danielvartan/business-investor-model/issues/" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title">Business Investor Model</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2025-04-16</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header><!-- badges: start --><p><a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-green.svg" class="img-fluid" alt="License: MIT"></a> <a href="https://creativecommons.org/licenses/by/4.0/"><img src="https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg" class="img-fluid" alt="License: CC BY 4.0"></a> <!-- badges: end --></p>
+<section id="overview" class="level2"><h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This report presents the implementation of the <em>Business Investor Model</em> described in <span class="citation" data-cites="railsback2019a">Railsback &amp; Grimm (<a href="#ref-railsback2019a" role="doc-biblioref">2019</a>)</span>. The model simulates interactions between businesses and investors to demonstrate fundamental concepts in agent-based modeling.</p>
+</section><section id="model-10.4.2" class="level2"><h2 class="anchored" data-anchor-id="model-10.4.2">Model 10.4.2</h2>
+</section><section id="setting-the-environment" class="level2"><h2 class="anchored" data-anchor-id="setting-the-environment">Setting the Environment</h2>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://danielvartan.github.io/brandr/">brandr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://here.r-lib.org/">here</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sfirke/janitor">janitor</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">stats</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="figure-10.1.1" class="level3"><h3 class="anchored" data-anchor-id="figure-10.1.1">Figure 10.1.1</h3>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span></span>
+<span>    <span class="st">"data"</span>,</span>
+<span>    <span class="st">"business-investor-model-10-4-2-figure-10-1-1-table.csv"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
+<span>    skip <span class="op">=</span> <span class="fl">6</span>,</span>
+<span>    col_types <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html">cols</a></span><span class="op">(</span>.default <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span></span>
+<span>    <span class="va">run_number</span>,</span>
+<span>    <span class="va">sensing_radius</span>,</span>
+<span>    <span class="va">mean_wealth_of_investors</span>,</span>
+<span>    <span class="va">standard_deviation_wealth_of_investors</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span></span>
+<span>      .cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      .fns <span class="op">=</span> <span class="va">as.numeric</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span></span>
+<span>    mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mean_wealth_of_investors</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    sd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">standard_deviation_wealth_of_investors</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    .by <span class="op">=</span> <span class="va">sensing_radius</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["sensing_radius"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["mean"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["sd"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"0","2":"41039.05935","3":"121861.8199"},{"1":"1","2":"249887.28268","3":"293463.4813"},{"1":"2","2":"366349.24640","3":"303346.1903"},{"1":"3","2":"509740.25380","3":"360971.1882"},{"1":"4","2":"576946.91785","3":"354934.0320"},{"1":"5","2":"626600.52681","3":"381099.2856"},{"1":"6","2":"620086.42053","3":"386584.5195"},{"1":"7","2":"610603.26946","3":"380761.9736"},{"1":"8","2":"672261.10781","3":"428023.7903"},{"1":"9","2":"655684.79995","3":"399592.6592"},{"1":"10","2":"600952.45972","3":"395071.0114"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span></span>
+<span>    mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sensing_radius</span>, y <span class="op">=</span> <span class="va">mean</span><span class="op">)</span>,</span>
+<span>    shape <span class="op">=</span> <span class="fl">19</span>,</span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span></span>
+<span>    mapping <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sensing_radius</span>, y <span class="op">=</span> <span class="va">sd</span><span class="op">)</span>,</span>
+<span>    shape <span class="op">=</span> <span class="fl">8</span>,</span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span></span>
+<span>    breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">600000</span>, <span class="fl">100000</span><span class="op">)</span>,</span>
+<span>    labels <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/formatc.html">prettyNum</a></span><span class="op">(</span><span class="va">.x</span>, big.mark <span class="op">=</span> <span class="st">","</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Sensing radius"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Mean final investor wealth"</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="index_files/figure-html/unnamed-chunk-6-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="figure-10.1.2" class="level3"><h3 class="anchored" data-anchor-id="figure-10.1.2">Figure 10.1.2</h3>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org//reference/here.html">here</a></span><span class="op">(</span></span>
+<span>    <span class="st">"data"</span>,</span>
+<span>    <span class="st">"business-investor-model-10-4-2-figure-10-1-2-table.csv"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span></span>
+<span>    skip <span class="op">=</span> <span class="fl">6</span>,</span>
+<span>    col_types <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html">cols</a></span><span class="op">(</span>.default <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/clean_names.html">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span></span>
+<span>    <span class="va">run_number</span>,</span>
+<span>    <span class="va">step</span>,</span>
+<span>    <span class="va">sensing_radius</span>,</span>
+<span>    <span class="va">mean_wealth_of_investors</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span></span>
+<span>      .cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>      .fns <span class="op">=</span> <span class="va">as.numeric</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>    sensing_radius <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">sensing_radius</span>, ordered <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span><span class="op">(</span></span>
+<span>    mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">mean_wealth_of_investors</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
+<span>    .by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"step"</span>, <span class="st">"sensing_radius"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["step"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["sensing_radius"],"name":[2],"type":["ord"],"align":["right"]},{"label":["mean"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"0","2":"0","3":"0.000000"},{"1":"1","2":"0","3":"4478.454978"},{"1":"2","2":"0","3":"8277.421481"},{"1":"3","2":"0","3":"11905.287181"},{"1":"4","2":"0","3":"15201.723978"},{"1":"5","2":"0","3":"18215.945098"},{"1":"6","2":"0","3":"20839.993997"},{"1":"7","2":"0","3":"22526.696961"},{"1":"8","2":"0","3":"25254.857611"},{"1":"9","2":"0","3":"27199.276118"},{"1":"10","2":"0","3":"29115.804267"},{"1":"11","2":"0","3":"30021.986347"},{"1":"12","2":"0","3":"31285.478183"},{"1":"13","2":"0","3":"31942.590130"},{"1":"14","2":"0","3":"33663.138102"},{"1":"15","2":"0","3":"34253.785967"},{"1":"16","2":"0","3":"35448.798392"},{"1":"17","2":"0","3":"33343.914219"},{"1":"18","2":"0","3":"31068.987462"},{"1":"19","2":"0","3":"30575.548178"},{"1":"20","2":"0","3":"30045.030517"},{"1":"21","2":"0","3":"29881.112730"},{"1":"22","2":"0","3":"31304.022860"},{"1":"23","2":"0","3":"32606.397644"},{"1":"24","2":"0","3":"33794.607305"},{"1":"25","2":"0","3":"33400.941000"},{"1":"26","2":"0","3":"33334.561950"},{"1":"27","2":"0","3":"34616.660486"},{"1":"28","2":"0","3":"33325.965122"},{"1":"29","2":"0","3":"32291.038554"},{"1":"30","2":"0","3":"30473.915341"},{"1":"31","2":"0","3":"29885.519395"},{"1":"32","2":"0","3":"30813.983378"},{"1":"33","2":"0","3":"31321.690993"},{"1":"34","2":"0","3":"32158.983651"},{"1":"35","2":"0","3":"33104.836112"},{"1":"36","2":"0","3":"34050.688572"},{"1":"37","2":"0","3":"34592.064948"},{"1":"38","2":"0","3":"35163.284894"},{"1":"39","2":"0","3":"33515.956682"},{"1":"40","2":"0","3":"34375.340186"},{"1":"41","2":"0","3":"31813.771537"},{"1":"42","2":"0","3":"32589.717184"},{"1":"43","2":"0","3":"32348.490948"},{"1":"44","2":"0","3":"32202.323465"},{"1":"45","2":"0","3":"30896.500445"},{"1":"46","2":"0","3":"30628.960472"},{"1":"47","2":"0","3":"30875.218358"},{"1":"48","2":"0","3":"31532.137897"},{"1":"49","2":"0","3":"32189.057437"},{"1":"50","2":"0","3":"32845.976976"},{"1":"0","2":"1","3":"0.000000"},{"1":"1","2":"1","3":"10778.437905"},{"1":"2","2":"1","3":"22513.965661"},{"1":"3","2":"1","3":"33756.195854"},{"1":"4","2":"1","3":"45094.227616"},{"1":"5","2":"1","3":"56859.241641"},{"1":"6","2":"1","3":"67236.341726"},{"1":"7","2":"1","3":"75987.737212"},{"1":"8","2":"1","3":"85976.964119"},{"1":"9","2":"1","3":"94207.340461"},{"1":"10","2":"1","3":"101340.480993"},{"1":"11","2":"1","3":"106861.745782"},{"1":"12","2":"1","3":"113563.454835"},{"1":"13","2":"1","3":"119744.412300"},{"1":"14","2":"1","3":"127003.609853"},{"1":"15","2":"1","3":"134281.915710"},{"1":"16","2":"1","3":"141972.656409"},{"1":"17","2":"1","3":"149091.073174"},{"1":"18","2":"1","3":"154583.142740"},{"1":"19","2":"1","3":"159969.255884"},{"1":"20","2":"1","3":"164069.125267"},{"1":"21","2":"1","3":"165005.379689"},{"1":"22","2":"1","3":"170199.902099"},{"1":"23","2":"1","3":"175043.940969"},{"1":"24","2":"1","3":"177423.157278"},{"1":"25","2":"1","3":"181512.451851"},{"1":"26","2":"1","3":"188786.220854"},{"1":"27","2":"1","3":"192894.876722"},{"1":"28","2":"1","3":"197597.105137"},{"1":"29","2":"1","3":"198564.264513"},{"1":"30","2":"1","3":"200427.814858"},{"1":"31","2":"1","3":"204316.074227"},{"1":"32","2":"1","3":"209540.578720"},{"1":"33","2":"1","3":"213108.715004"},{"1":"34","2":"1","3":"216020.366503"},{"1":"35","2":"1","3":"220234.916723"},{"1":"36","2":"1","3":"224011.239410"},{"1":"37","2":"1","3":"230264.421874"},{"1":"38","2":"1","3":"234558.284014"},{"1":"39","2":"1","3":"231997.511583"},{"1":"40","2":"1","3":"237393.170777"},{"1":"41","2":"1","3":"242073.559628"},{"1":"42","2":"1","3":"246581.746267"},{"1":"43","2":"1","3":"251191.667760"},{"1":"44","2":"1","3":"250180.611724"},{"1":"45","2":"1","3":"249986.900752"},{"1":"46","2":"1","3":"253482.113470"},{"1":"47","2":"1","3":"253253.981477"},{"1":"48","2":"1","3":"259046.868333"},{"1":"49","2":"1","3":"259231.169395"},{"1":"50","2":"1","3":"262570.396887"},{"1":"0","2":"2","3":"0.000000"},{"1":"1","2":"2","3":"14092.935515"},{"1":"2","2":"2","3":"28638.278255"},{"1":"3","2":"2","3":"43986.909875"},{"1":"4","2":"2","3":"58222.668130"},{"1":"5","2":"2","3":"71226.529097"},{"1":"6","2":"2","3":"85675.952566"},{"1":"7","2":"2","3":"98909.686986"},{"1":"8","2":"2","3":"109213.724538"},{"1":"9","2":"2","3":"122149.857433"},{"1":"10","2":"2","3":"133325.959156"},{"1":"11","2":"2","3":"145757.869382"},{"1":"12","2":"2","3":"155561.566943"},{"1":"13","2":"2","3":"165496.339823"},{"1":"14","2":"2","3":"172074.181947"},{"1":"15","2":"2","3":"183014.248581"},{"1":"16","2":"2","3":"193682.773361"},{"1":"17","2":"2","3":"202054.353298"},{"1":"18","2":"2","3":"209078.324179"},{"1":"19","2":"2","3":"215815.210587"},{"1":"20","2":"2","3":"223904.054378"},{"1":"21","2":"2","3":"232178.468727"},{"1":"22","2":"2","3":"241467.887030"},{"1":"23","2":"2","3":"253479.065222"},{"1":"24","2":"2","3":"259419.907837"},{"1":"25","2":"2","3":"267995.847880"},{"1":"26","2":"2","3":"270016.586393"},{"1":"27","2":"2","3":"276589.123269"},{"1":"28","2":"2","3":"287218.878580"},{"1":"29","2":"2","3":"293074.353605"},{"1":"30","2":"2","3":"303358.965100"},{"1":"31","2":"2","3":"309907.719782"},{"1":"32","2":"2","3":"312672.174140"},{"1":"33","2":"2","3":"318830.354931"},{"1":"34","2":"2","3":"326742.480391"},{"1":"35","2":"2","3":"331476.299846"},{"1":"36","2":"2","3":"331823.690400"},{"1":"37","2":"2","3":"331725.450540"},{"1":"38","2":"2","3":"331102.780391"},{"1":"39","2":"2","3":"334232.291310"},{"1":"40","2":"2","3":"341745.530799"},{"1":"41","2":"2","3":"348122.180590"},{"1":"42","2":"2","3":"356033.525641"},{"1":"43","2":"2","3":"360428.489086"},{"1":"44","2":"2","3":"361459.688779"},{"1":"45","2":"2","3":"364325.097604"},{"1":"46","2":"2","3":"372491.873008"},{"1":"47","2":"2","3":"377618.991926"},{"1":"48","2":"2","3":"381802.709496"},{"1":"49","2":"2","3":"385332.004812"},{"1":"50","2":"2","3":"385991.328849"},{"1":"0","2":"5","3":"0.000000"},{"1":"1","2":"5","3":"20766.445889"},{"1":"2","2":"5","3":"41177.274185"},{"1":"3","2":"5","3":"60790.643877"},{"1":"4","2":"5","3":"78806.230342"},{"1":"5","2":"5","3":"96083.980196"},{"1":"6","2":"5","3":"112294.847676"},{"1":"7","2":"5","3":"126495.167547"},{"1":"8","2":"5","3":"145098.203202"},{"1":"9","2":"5","3":"163518.102606"},{"1":"10","2":"5","3":"178750.625514"},{"1":"11","2":"5","3":"195490.754907"},{"1":"12","2":"5","3":"208941.300598"},{"1":"13","2":"5","3":"223509.138049"},{"1":"14","2":"5","3":"232896.544936"},{"1":"15","2":"5","3":"244754.885989"},{"1":"16","2":"5","3":"251958.393363"},{"1":"17","2":"5","3":"265145.485938"},{"1":"18","2":"5","3":"278474.077759"},{"1":"19","2":"5","3":"289750.937803"},{"1":"20","2":"5","3":"303913.694487"},{"1":"21","2":"5","3":"318291.971574"},{"1":"22","2":"5","3":"331387.753905"},{"1":"23","2":"5","3":"343099.865384"},{"1":"24","2":"5","3":"356498.512921"},{"1":"25","2":"5","3":"362746.554629"},{"1":"26","2":"5","3":"377688.157779"},{"1":"27","2":"5","3":"392384.282797"},{"1":"28","2":"5","3":"401415.349803"},{"1":"29","2":"5","3":"414798.512113"},{"1":"30","2":"5","3":"426265.635026"},{"1":"31","2":"5","3":"422187.368869"},{"1":"32","2":"5","3":"433422.249872"},{"1":"33","2":"5","3":"444670.406690"},{"1":"34","2":"5","3":"453503.073490"},{"1":"35","2":"5","3":"464184.456249"},{"1":"36","2":"5","3":"471388.711626"},{"1":"37","2":"5","3":"480843.510139"},{"1":"38","2":"5","3":"488842.820720"},{"1":"39","2":"5","3":"494377.306574"},{"1":"40","2":"5","3":"501964.641066"},{"1":"41","2":"5","3":"514706.383988"},{"1":"42","2":"5","3":"523689.718770"},{"1":"43","2":"5","3":"533564.797609"},{"1":"44","2":"5","3":"544053.303832"},{"1":"45","2":"5","3":"552388.019470"},{"1":"46","2":"5","3":"560091.018783"},{"1":"47","2":"5","3":"571984.417428"},{"1":"48","2":"5","3":"579721.809679"},{"1":"49","2":"5","3":"589515.086896"},{"1":"50","2":"5","3":"600789.620687"},{"1":"0","2":"10","3":"0.000000"},{"1":"1","2":"10","3":"23718.071755"},{"1":"2","2":"10","3":"45786.152340"},{"1":"3","2":"10","3":"68362.322723"},{"1":"4","2":"10","3":"89148.016931"},{"1":"5","2":"10","3":"111016.366411"},{"1":"6","2":"10","3":"131544.493423"},{"1":"7","2":"10","3":"151344.075854"},{"1":"8","2":"10","3":"166976.813377"},{"1":"9","2":"10","3":"186619.660395"},{"1":"10","2":"10","3":"207213.029131"},{"1":"11","2":"10","3":"221326.448321"},{"1":"12","2":"10","3":"237478.899221"},{"1":"13","2":"10","3":"252413.498143"},{"1":"14","2":"10","3":"267291.378156"},{"1":"15","2":"10","3":"284754.769386"},{"1":"16","2":"10","3":"300331.249000"},{"1":"17","2":"10","3":"316165.779326"},{"1":"18","2":"10","3":"325757.181369"},{"1":"19","2":"10","3":"340782.794818"},{"1":"20","2":"10","3":"358907.280804"},{"1":"21","2":"10","3":"377695.651126"},{"1":"22","2":"10","3":"386375.180129"},{"1":"23","2":"10","3":"401757.630565"},{"1":"24","2":"10","3":"414621.666306"},{"1":"25","2":"10","3":"428496.499698"},{"1":"26","2":"10","3":"445498.923075"},{"1":"27","2":"10","3":"461910.046912"},{"1":"28","2":"10","3":"476295.151989"},{"1":"29","2":"10","3":"481139.105911"},{"1":"30","2":"10","3":"491736.242055"},{"1":"31","2":"10","3":"506607.857995"},{"1":"32","2":"10","3":"522354.442161"},{"1":"33","2":"10","3":"533728.063668"},{"1":"34","2":"10","3":"536596.691376"},{"1":"35","2":"10","3":"545245.855946"},{"1":"36","2":"10","3":"558090.662312"},{"1":"37","2":"10","3":"574916.749489"},{"1":"38","2":"10","3":"589863.161791"},{"1":"39","2":"10","3":"601556.095398"},{"1":"40","2":"10","3":"617783.902082"},{"1":"41","2":"10","3":"624703.943189"},{"1":"42","2":"10","3":"634147.776410"},{"1":"43","2":"10","3":"642573.938703"},{"1":"44","2":"10","3":"646244.474088"},{"1":"45","2":"10","3":"653929.411551"},{"1":"46","2":"10","3":"651090.304845"},{"1":"47","2":"10","3":"651978.231144"},{"1":"48","2":"10","3":"665800.074232"},{"1":"49","2":"10","3":"676588.174063"},{"1":"50","2":"10","3":"690060.814612"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>Code</summary><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">data</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">step</span>, y <span class="op">=</span> <span class="va">mean</span>, color <span class="op">=</span> <span class="va">sensing_radius</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span></span>
+<span>    breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">700000</span>, <span class="fl">100000</span><span class="op">)</span>,</span>
+<span>    labels <span class="op">=</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/formatc.html">prettyNum</a></span><span class="op">(</span><span class="va">.x</span>, big.mark <span class="op">=</span> <span class="st">","</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="st">"Year"</span>,</span>
+<span>    y <span class="op">=</span> <span class="st">"Mean investor wealth"</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"Sensing radius"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">brandr</span><span class="fu">::</span><span class="fu"><a href="https://danielvartan.github.io/brandr/reference/scale_brand.html">scale_color_brand_d</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><a href="index_files/figure-html/unnamed-chunk-10-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section id="license" class="level2"><h2 class="anchored" data-anchor-id="license">License</h2>
+<div style="text-align: left;">
+<p><a href="http://creativecommons.org/publicdomain/zero/1.0/"><img src="https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg" class="img-fluid"></a></p>
+</div>
+<p>This report is licensed under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0 Universal</a>, placing it in the public domain. You may freely copy, modify, distribute, and use this work, even for commercial purposes, without permission or attribution.</p>
+</section><section id="references" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-railsback2019a" class="csl-entry" role="listitem">
+Railsback, S. F., &amp; Grimm, V. (2019). <em>Agent-based and individual-based modeling: A practical introduction</em> (2nd ed.). Princeton University Press.
+</div>
+</div>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/danielvartan\.github\.io\/business-investor-model\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/danielvartan/business-investor-model/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/danielvartan/business-investor-model/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/danielvartan/business-investor-model/issues/" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+</body></html>

@@ -11,7 +11,7 @@ project:
   render: [index.qmd]
   post-render: "R/_post-render.R"
 
-title: Railsback & Grimm (2019) Business Investor Model
+title: Business Investor Model
 keyword: >
   Complexity science, Agent-based modeling, Individual-Based Models,
   Bottom-up modeling
@@ -52,7 +52,7 @@ format:
     toc-location: right
     locale: en
     language: en-us
-    code-fold: false
+    code-fold: true
     code-link: true
     code-tools: false
     df-print: paged
