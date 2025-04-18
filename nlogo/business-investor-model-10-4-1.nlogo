@@ -29,7 +29,7 @@ to setup
     setxy random-pxcor random-pycor
     set shape "person"
     set color investors-color
-    set size 1.25
+    set size 1.5
     set pen-mode "down"
     set wealth wealth-start
 
