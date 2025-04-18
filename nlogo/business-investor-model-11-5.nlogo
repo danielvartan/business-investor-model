@@ -280,7 +280,7 @@ Frequency
 0.0
 true
 false
-"set-plot-x-range 0 (precision (risk-of-failing-max + 0.05) 2)\nset-histogram-num-bars 30" ""
+"set-plot-x-range 0.01 (precision (risk-of-failing-max + 0.05) 2)\nset-histogram-num-bars 30" ""
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [risk-of-failing] of patches with [is-number? risk-of-failing]"
 

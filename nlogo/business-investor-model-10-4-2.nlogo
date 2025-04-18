@@ -312,7 +312,7 @@ INPUTBOX
 230
 350
 investors-color
-15.0
+25.0
 1
 0
 Color

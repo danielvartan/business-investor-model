@@ -247,7 +247,7 @@ Frequency
 0.0
 true
 false
-"set-plot-x-range 0 (1 + 0.05)\nset-histogram-num-bars 30" ""
+"set-plot-x-range 0.01 (1 + 0.05)\nset-histogram-num-bars 30" ""
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [risk-of-failing] of patches with [is-number? risk-of-failing]"
 
@@ -312,7 +312,7 @@ INPUTBOX
 230
 310
 investors-color
-15.0
+25.0
 1
 0
 Color
