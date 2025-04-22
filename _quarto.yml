@@ -3,7 +3,6 @@ editor: source
 execute:
   cache: false # "Danger Will Robinson!"
   freeze: false # If you plan to use it, remember to disable it afterward!
-                # Goddammit! What did I tell you?
 
 project:
   type: website
@@ -14,7 +13,7 @@ project:
 title: Business Investor Model
 keyword: >
   Complexity science, Agent-based modeling, Individual-Based Models,
-  Bottom-up modeling
+  Bottom-up modeling, Investing model.
 date: today
 date-format: "YYYY-MM-DD"
 
@@ -36,7 +35,7 @@ website:
     background: "#272B33"
     right:
       - icon: github
-        href: https://danielvartan.github.io/business-investor-model/
+        href: https://github.com/danielvartan/business-investor-model
         aria-label: GitHub
 
 lightbox:

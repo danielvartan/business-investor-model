@@ -1,12 +1,8 @@
-; Business Investor Model T11.5
+; Business Investor Model (11.5)
 ;
 ; Author: Daniel Vartanian
-; Version: 0.1.0 2025-04-16
+; Version: 0.1.1 2025-04-21
 ; License : CC0 1.0 Universal
-
-extensions [
-  palette
-]
 
 globals [
   failed-investors
@@ -28,8 +24,28 @@ patches-own [
 to setup
   clear-all
 
+  set failed-investors 0
   set total-business-failures 0
 
+  setup-investors
+  setup-businesses
+
+  reset-ticks
+end
+
+to go
+  perform-repositioning
+  update-business
+  update-wealth
+
+  ifelse (ticks = 50) [
+    stop
+  ] [
+    tick
+  ]
+end
+
+to setup-investors
   create-investors investors-n [
     setxy random-pxcor random-pycor
     set shape "person"
@@ -42,7 +58,9 @@ to setup
       setxy random-pxcor random-pycor
     ]
   ]
+end
 
+to setup-businesses
   ask patches [
     set profit random-exponential profit-mean
     set profit profit - 2000
@@ -50,29 +68,21 @@ to setup
     set risk-of-failing random-float risk-of-failing-max
     if risk-of-failing < 0.01 [set risk-of-failing 0.01]
 
-    (
-      ifelse
+    (ifelse
       (profit < 0) [
-        set pcolor scale-color businesses-color-negative profit (- (profit-mean * 2.5)) 0
+        set pcolor (
+          scale-color businesses-color-negative profit
+          (- (profit-mean * 5)) 0
+        )
       ] (profit = 0) [
         set pcolor white
       ] (profit > 0) [
-        set pcolor scale-color businesses-color-positive profit (profit-mean * 2.5) 0
+        set pcolor (
+          scale-color businesses-color-positive profit (profit-mean * 5) 0
+        )
       ]
     )
   ]
-
-  reset-ticks
-end
-
-to go
-  if (ticks = 50) [stop]
-
-  perform-repositioning
-  update-business
-  update-wealth
-
-  tick
 end
 
 to perform-repositioning
@@ -90,7 +100,7 @@ to perform-repositioning
 end
 
 to update-business
-  ask patches with [is-number? risk-of-failing] [
+  ask turtles-on patches [
     if ((random-float 1) < risk-of-failing) [
       set profit "NA"
       set risk-of-failing "NA"
@@ -130,19 +140,13 @@ to-report utility-for [#investor]
 end
 
 to-report utility [#wealth #profit #risk #time]
-  let out (#wealth + (#time * #profit)) * ((1 - #risk) ^ #time)
-
-  ifelse (out < 0) [
-    report 0
-  ] [
-    report out
-  ]
+  report (#wealth + (#time * #profit)) * ((1 - #risk) ^ #time)
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-245
+235
 10
-760
+750
 526
 -1
 -1
@@ -169,7 +173,7 @@ Years
 BUTTON
 10
 10
-115
+110
 45
 Setup
 setup
@@ -184,9 +188,9 @@ NIL
 1
 
 BUTTON
-125
+120
 10
-230
+220
 45
 Go
 go
@@ -200,10 +204,129 @@ NIL
 NIL
 1
 
-PLOT
-775
+SLIDER
 10
-995
+50
+220
+83
+investors-n
+investors-n
+0
+100
+25.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+10
+88
+220
+121
+wealth-start
+wealth-start
+0
+100000
+0.0
+10
+1
+NIL
+HORIZONTAL
+
+SLIDER
+10
+126
+220
+159
+profit-mean
+profit-mean
+0
+10000
+5000.0
+10
+1
+NIL
+HORIZONTAL
+
+SLIDER
+10
+164
+220
+197
+risk-of-failing-max
+risk-of-failing-max
+0
+1
+0.1
+0.01
+1
+NIL
+HORIZONTAL
+
+SLIDER
+10
+202
+220
+235
+decision-time-horizon
+decision-time-horizon
+0
+25
+5.0
+1
+1
+NIL
+HORIZONTAL
+
+INPUTBOX
+10
+240
+220
+300
+investors-color
+25.0
+1
+0
+Color
+
+INPUTBOX
+10
+305
+220
+365
+businesses-color-positive
+105.0
+1
+0
+Color
+
+INPUTBOX
+10
+370
+220
+430
+businesses-color-negative
+15.0
+1
+0
+Color
+
+INPUTBOX
+10
+435
+220
+495
+failed-businesses-color
+45.0
+1
+0
+Color
+
+PLOT
+765
+10
+975
 215
 Wealth (W)
 NIL
@@ -218,157 +341,54 @@ false
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [wealth] of investors"
 
-SLIDER
-10
-50
-230
-83
-investors-n
-investors-n
-0
-100
-25.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-10
-130
-230
-163
-profit-mean
-profit-mean
-0
-10000
-5000.0
-10
-1
-NIL
-HORIZONTAL
-
-PLOT
-1005
-10
-1225
-215
-Profit (P)
-NIL
-Frequency
-0.0
-0.0
-0.0
-0.0
-true
-false
-"let min-plot-x ceiling (min [profit] of patches with [is-number? profit])\nlet max-plot-x ceiling (max [profit] of patches with [is-number? profit])\nset min-plot-x (ifelse-value (min-plot-x < 0) [min-plot-x] [0])\nset-plot-x-range min-plot-x (max-plot-x + 10)\nset-histogram-num-bars 30" ""
-PENS
-"default" 1.0 1 -16777216 true "" "histogram [profit] of patches with [is-number? profit]"
-
-PLOT
-1235
-10
-1455
-215
-Risk of Failing (F)
-NIL
-Frequency
-0.0
-0.0
-0.0
-0.0
-true
-false
-"set-plot-x-range 0.01 (precision (risk-of-failing-max + 0.05) 2)\nset-histogram-num-bars 30" ""
-PENS
-"default" 1.0 1 -16777216 true "" "histogram [risk-of-failing] of patches with [is-number? risk-of-failing]"
-
 MONITOR
-1005
+765
 220
-1117
+865
 265
-Mean (P Chosen)
-mean [profit] of turtles-on patches
+Mean (W)
+mean [wealth] of investors
 5
 1
 11
 
 MONITOR
-1120
+875
 220
-1225
+975
 265
-SD (P Chosen)
-standard-deviation [profit] of turtles-on patches
+SD (W)
+standard-deviation [wealth] of investors
 5
 1
 11
 
 MONITOR
-1235
-220
-1347
-265
-Mean (F Chosen)
-mean [risk-of-failing] of turtles-on patches
-5
-1
-11
-
-MONITOR
-1350
-220
-1455
-265
-SD (F Chosen)
-standard-deviation [risk-of-failing] of turtles-on patches
-5
-1
-11
-
-INPUTBOX
-10
+765
+270
+865
 315
-230
-375
-businesses-color-positive
-105.0
+Min (W)
+min [wealth] of investors
+5
 1
-0
-Color
+11
 
-INPUTBOX
-10
-250
-230
-310
-investors-color
-25.0
+MONITOR
+875
+270
+975
+315
+Max (W)
+max [wealth] of investors
+5
 1
-0
-Color
-
-SLIDER
-10
-210
-230
-243
-decision-time-horizon
-decision-time-horizon
-0
-25
-5.0
-1
-1
-NIL
-HORIZONTAL
+11
 
 PLOT
-775
+765
 320
-995
+975
 525
 Mean Wealth (W)
 Years
@@ -383,32 +403,72 @@ false
 PENS
 "default" 1.0 0 -16777216 true "" "plot mean [wealth] of investors"
 
+PLOT
+985
+10
+1195
+215
+Profit (P)
+NIL
+Frequency
+0.0
+0.0
+0.0
+0.0
+true
+false
+"let min-plot-x ceiling (min [profit] of patches with [is-number? profit])\nlet max-plot-x ceiling (max [profit] of patches with [is-number? profit])\nset min-plot-x (ifelse-value (min-plot-x < 0) [min-plot-x] [0])\nset-plot-x-range min-plot-x (max-plot-x + 10)\nset-histogram-num-bars 30" ""
+PENS
+"default" 1.0 1 -16777216 true "" "histogram [profit] of patches with [is-number? profit]"
+
 MONITOR
-775
+985
 220
-875
+1085
 265
-Mean (W)
-mean [wealth] of investors
+Mean (P Chosen)
+mean [profit] of turtles-on patches
 5
 1
 11
 
 MONITOR
-885
+1095
 220
-995
+1195
 265
-SD (W)
-standard-deviation [wealth] of investors
+SD (P Chosen)
+standard-deviation [profit] of turtles-on patches
+5
+1
+11
+
+MONITOR
+985
+270
+1085
+315
+Min (P Chosen)
+min [profit] of turtles-on patches
+5
+1
+11
+
+MONITOR
+1095
+270
+1195
+315
+Max (P Chosen)
+max [profit] of turtles-on patches
 5
 1
 11
 
 PLOT
-1005
+985
 320
-1225
+1195
 525
 Mean Profit (P Chosen)
 Years
@@ -424,9 +484,71 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot mean [profit] of turtles-on patches"
 
 PLOT
-1235
+1205
+10
+1415
+215
+Risk of Failing (F)
+NIL
+Frequency
+0.0
+0.0
+0.0
+0.0
+true
+false
+"set-plot-x-range 0.01 (precision (risk-of-failing-max) 2)\nset-histogram-num-bars 30" ""
+PENS
+"default" 1.0 1 -16777216 true "" "histogram [risk-of-failing] of patches with [is-number? risk-of-failing]"
+
+MONITOR
+1205
+220
+1305
+265
+Mean (F Chosen)
+mean [risk-of-failing] of turtles-on patches
+5
+1
+11
+
+MONITOR
+1315
+220
+1415
+265
+SD (F Chosen)
+standard-deviation [risk-of-failing] of turtles-on patches
+5
+1
+11
+
+MONITOR
+1205
+270
+1305
+315
+Min (F Chosen)
+min [risk-of-failing] of turtles-on patches
+5
+1
+11
+
+MONITOR
+1315
+270
+1415
+315
+Max (F Chosen)
+max [risk-of-failing] of turtles-on patches
+5
+1
+11
+
+PLOT
+1205
 320
-1455
+1415
 525
 Mean Risk of Failing (F Chosen)
 Years
@@ -441,116 +563,10 @@ false
 PENS
 "default" 1.0 0 -16777216 true "" "plot mean [risk-of-failing] of turtles-on patches"
 
-MONITOR
-775
-270
-875
-315
-Min (W)
-min [wealth] of investors
-5
-1
-11
-
-MONITOR
-885
-270
-995
-315
-Max (W)
-max [wealth] of investors
-5
-1
-11
-
-MONITOR
-1005
-270
-1110
-315
-Min (P Chosen)
-min [profit] of turtles-on patches
-5
-1
-11
-
-MONITOR
-1120
-270
-1225
-315
-Max (P Chosen)
-max [profit] of turtles-on patches
-5
-1
-11
-
-MONITOR
-1235
-270
-1340
-315
-Min (F Chosen)
-min [risk-of-failing] of turtles-on patches
-5
-1
-11
-
-MONITOR
-1350
-270
-1455
-315
-Max (F Chosen)
-max [risk-of-failing] of turtles-on patches
-5
-1
-11
-
 PLOT
-1465
-320
-1685
-525
-Failed Investors
-Years
-Investors
-0.0
-0.0
-0.0
-0.0
-true
-false
-"" "set-plot-x-range 0 (ticks + 0.5)"
-PENS
-"default" 1.0 0 -16777216 true "" "plot count investors with [suffered-a-failure? = true]"
-
-MONITOR
-1465
-270
-1570
-315
-Failed Investors
-count investors with [suffered-a-failure? = true]
+1425
 10
-1
-11
-
-INPUTBOX
-10
-450
-230
-510
-failed-businesses-color
-9.0
-1
-0
-Color
-
-PLOT
-1465
-10
-1685
+1635
 215
 SD Wealth (W)
 Years
@@ -566,9 +582,9 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot standard-deviation [wealth] of investors"
 
 MONITOR
-1465
+1425
 220
-1685
+1635
 265
 SD (W)
 standard-deviation [wealth] of investors
@@ -576,51 +592,21 @@ standard-deviation [wealth] of investors
 1
 11
 
-SLIDER
-10
-170
-230
-203
-risk-of-failing-max
-risk-of-failing-max
-0
-1
-0.1
-0.01
-1
-NIL
-HORIZONTAL
-
-SLIDER
-10
-90
-232
-123
-wealth-start
-wealth-start
-0
-100000
-0.0
+MONITOR
+1425
+270
+1525
+315
+Failed Investors
+count investors with [suffered-a-failure? = true]
 10
 1
-NIL
-HORIZONTAL
-
-INPUTBOX
-10
-380
-230
-440
-businesses-color-negative
-15.0
-1
-0
-Color
+11
 
 MONITOR
-1575
+1535
 270
-1685
+1635
 315
 Businesses failures
 total-business-failures
@@ -628,8 +614,26 @@ total-business-failures
 1
 11
 
+PLOT
+1425
+320
+1635
+525
+Failed Investors
+Years
+Investors
+0.0
+0.0
+0.0
+0.0
+true
+false
+"" "set-plot-x-range 0 (ticks + 0.5)"
+PENS
+"default" 1.0 0 -16777216 true "" "plot count investors with [suffered-a-failure? = true]"
+
 @#$#@#$#@
-# THE BUSINESS INVESTOR MODEL (T11.5)
+# THE BUSINESS INVESTOR MODEL (11.5)
 
 See Topic 11.5 from Railsback & Grimm (2019) to learn about this model.
 
@@ -954,54 +958,37 @@ NetLogo 6.4.0
     <metric>mean [profit] of turtles-on patches</metric>
     <metric>mean [risk-of-failing] of turtles-on patches</metric>
     <metric>total-business-failures</metric>
-    <enumeratedValueSet variable="n-investors">
+    <enumeratedValueSet variable="investors-n">
       <value value="25"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="risk-of-failing-max">
-      <value value="0.1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="failed-businesses-color">
-      <value value="9"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="businesses-color-negative">
-      <value value="15"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="businesses-color-positive">
-      <value value="105"/>
-    </enumeratedValueSet>
-    <steppedValueSet variable="decision-time-horizon" first="1" step="1" last="25"/>
     <enumeratedValueSet variable="wealth-start">
       <value value="0"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="profit-mean">
       <value value="5000"/>
     </enumeratedValueSet>
+    <enumeratedValueSet variable="risk-of-failing-max">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <steppedValueSet variable="decision-time-horizon" first="1" step="1" last="25"/>
     <enumeratedValueSet variable="investors-color">
       <value value="25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="businesses-color-positive">
+      <value value="105"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="businesses-color-negative">
+      <value value="15"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="failed-businesses-color">
+      <value value="9"/>
     </enumeratedValueSet>
   </experiment>
   <experiment name="Figure 12.2" repetitions="10" runMetricsEveryStep="true">
     <setup>setup</setup>
     <go>go</go>
     <metric>mean [risk-of-failing] of turtles-on patches</metric>
-    <enumeratedValueSet variable="n-investors">
-      <value value="25"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="risk-of-failing-max">
-      <value value="0.1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="failed-businesses-color">
-      <value value="9"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="businesses-color-negative">
-      <value value="15"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="businesses-color-positive">
-      <value value="105"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="decision-time-horizon">
-      <value value="1"/>
-      <value value="5"/>
+    <enumeratedValueSet variable="investors-n">
       <value value="25"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="wealth-start">
@@ -1010,8 +997,25 @@ NetLogo 6.4.0
     <enumeratedValueSet variable="profit-mean">
       <value value="5000"/>
     </enumeratedValueSet>
+    <enumeratedValueSet variable="risk-of-failing-max">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="decision-time-horizon">
+      <value value="1"/>
+      <value value="5"/>
+      <value value="25"/>
+    </enumeratedValueSet>
     <enumeratedValueSet variable="investors-color">
       <value value="25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="businesses-color-positive">
+      <value value="105"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="businesses-color-negative">
+      <value value="15"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="failed-businesses-color">
+      <value value="9"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>

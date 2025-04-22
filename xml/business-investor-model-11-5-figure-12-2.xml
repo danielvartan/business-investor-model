@@ -5,24 +5,7 @@
     <setup>setup</setup>
     <go>go</go>
     <metric>mean [risk-of-failing] of turtles-on patches</metric>
-    <enumeratedValueSet variable="n-investors">
-      <value value="25"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="risk-of-failing-max">
-      <value value="0.1"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="failed-businesses-color">
-      <value value="9"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="businesses-color-negative">
-      <value value="15"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="businesses-color-positive">
-      <value value="105"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="decision-time-horizon">
-      <value value="1"/>
-      <value value="5"/>
+    <enumeratedValueSet variable="investors-n">
       <value value="25"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="wealth-start">
@@ -31,8 +14,25 @@
     <enumeratedValueSet variable="profit-mean">
       <value value="5000"/>
     </enumeratedValueSet>
+    <enumeratedValueSet variable="risk-of-failing-max">
+      <value value="0.1"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="decision-time-horizon">
+      <value value="1"/>
+      <value value="5"/>
+      <value value="25"/>
+    </enumeratedValueSet>
     <enumeratedValueSet variable="investors-color">
       <value value="25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="businesses-color-positive">
+      <value value="105"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="businesses-color-negative">
+      <value value="15"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="failed-businesses-color">
+      <value value="9"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>

@@ -5,14 +5,20 @@
     <setup>setup</setup>
     <go>go</go>
     <metric>mean [wealth] of investors</metric>
-    <enumeratedValueSet variable="n-investors">
+    <enumeratedValueSet variable="investors-n">
       <value value="25"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="wealth-start">
+      <value value="0"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="profit-mean">
+      <value value="5000"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="risk-of-failing-max">
       <value value="0.1"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="failed-businesses-color">
-      <value value="9"/>
+    <enumeratedValueSet variable="decision-time-horizon">
+      <value value="5"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="sensing-radius">
       <value value="0"/>
@@ -21,20 +27,14 @@
       <value value="5"/>
       <value value="10"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="decision-time-horizon">
-      <value value="5"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="wealth-start">
-      <value value="0"/>
-    </enumeratedValueSet>
-    <enumeratedValueSet variable="profit-mean">
-      <value value="5000"/>
+    <enumeratedValueSet variable="investors-color">
+      <value value="25"/>
     </enumeratedValueSet>
     <enumeratedValueSet variable="businesses-color">
       <value value="105"/>
     </enumeratedValueSet>
-    <enumeratedValueSet variable="investors-color">
-      <value value="15"/>
+    <enumeratedValueSet variable="failed-businesses-color">
+      <value value="45"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>
