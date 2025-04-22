@@ -598,7 +598,8 @@ PENS
 @#$#@#$#@
 # THE BUSINESS INVESTOR MODEL (10.4.1)
 
-See Topic 10.4.1 from Railsback & Grimm (2019) to learn about this model.
+For more information about this model, see Topic 10.4.1 in Railsback & Grimm ([2019](https://www.railsback-grimm-abm-book.com/)). You can also access a report on the model [here](https://danielvartan.github.io/business-investor-model/).
+
 
 ## REFERENCES
 
