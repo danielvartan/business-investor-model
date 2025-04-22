@@ -395,7 +395,7 @@ Frequency
 0.0
 true
 false
-"let min-plot-x ceiling (min [profit] of patches with [is-number? profit])\nlet max-plot-x ceiling (max [profit] of patches with [is-number? profit])\nset min-plot-x (ifelse-value (min-plot-x < 0) [min-plot-x] [0])\nset-plot-x-range min-plot-x (max-plot-x + 10)\nset-histogram-num-bars 30" ""
+"let min-plot-x floor (min [profit] of patches with [is-number? profit])\nlet max-plot-x ceiling (max [profit] of patches with [is-number? profit])\nset min-plot-x (ifelse-value (min-plot-x < 0) [min-plot-x] [0])\nset-plot-x-range min-plot-x (max-plot-x + 10)\nset-histogram-num-bars 30" ""
 PENS
 "default" 1.0 1 -16777216 true "" "histogram [profit] of patches with [is-number? profit]"
 
